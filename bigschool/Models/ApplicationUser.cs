@@ -20,7 +20,7 @@ namespace bigschool.Models
         public ApplicationUser()
         {
             Followers = new Collection<Following>();
-            Followers = new Collection<Following>();
+            Followees = new Collection<Following>();
         }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
