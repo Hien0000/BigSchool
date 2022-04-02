@@ -6,7 +6,7 @@
 
 <h2>Attending</h2>
 
-<ul class="courses">
+<ul class="course">
     @foreach (var course in Model.UpcommingCourses)
     {
         <li>
@@ -39,6 +39,67 @@
         </li>
     }
 </ul>
+
+@section scripts{
+    <script>
+    $(document).ready(function () {
+                $('.js-toggle-attendance').click(function (e) {
+                    var button = $(e.target);
+                    $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                        .done(function (response) {
+                            if (response.isFollow) {
+                                button.removeClass('btn-default')
+                                    .addClass('btn-info')
+                                    .text('Going');
+
+                            }
+                            else {
+                                button.removeClass('btn-info')
+                                    .addClass('btn-default')
+                                    .text('Going?');
+                            }
+
+                        })
+                        .fail(
+                            function () {
+                                alert('Songthing failed!');
+                            });
+                });
+                $('.js-toggle-follow').click(function (e) {
+                    var button = $(e.target);
+                    $.post("/api/followings", { followeeId: button.attr("data-user-id") })
+                        .done((response) => {
+                            if (response.isFollow) {
+
+                                $('.js-toggle-follow').map((index, value) => {
+                                    console.log($(value).attr('data-user-id'), response.followeeId);
+                                    if ($(value).attr('data-user-id') == response.followeeId) {
+
+                                        return $(value).removeClass('btn-default')
+                                            .addClass('btn-info')
+                                            .text('Following');
+                                    }
+                                });
+                            } else {
+                                $('.js-toggle-follow').map((index, value) => {
+                                    if ($(value).attr('data-user-id') == response.followeeId) {
+                                        $(value).removeClass('btn-info')
+                                            .addClass('btn-default')
+                                            .text('Follow?');
+                                    }
+                                });
+                            }
+
+
+                        })
+                        .fail(
+                            function () {
+                                alert('Songthing failed!');
+                            });
+                });
+            })</script>
+}
+</div>
 
 
 
