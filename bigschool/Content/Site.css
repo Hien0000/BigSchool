@@ -16,7 +16,7 @@
     white-space: normal;
 }
 .navbar-inverse {
-    background-color: #ec35e4;
+    background-color: #b6ff00;
     border-color: #1275ed;
 }
 
@@ -37,14 +37,14 @@ position: relative;
 margin-bottom: 30px;
 }
 
-.course > li .date {
-    text-align: center;
-    background-color: #d41d50;
-    color: yellow;
-    width: 60px;
-    border-radius: 8px;
-    margin-top: 10px;
-}
+    .course > li .date {
+        text-align: center;
+        background-color: #b6ff00;
+        color: black;
+        width: 60px;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
 
 .course > li .details {
     position: absolute;
@@ -67,6 +67,16 @@ margin-top: -25px;
 margin-bottom: 20px;
 }
 
+.course > li  .action
+{
+    display:none;
+    left: 70px;
+    position: absolute ;
+}
+
+.course > li:hover  .action{
+    display: block;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
